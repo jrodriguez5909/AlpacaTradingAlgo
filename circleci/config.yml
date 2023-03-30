@@ -1,0 +1,92 @@
+version: 2.1
+
+orbs:
+  python: circleci/python@0.2.1
+
+jobs:
+  build-and-test:
+    docker:
+      - image: cimg/python:3.8.6
+    steps:
+      - checkout
+      - python/load-cache
+      - python/install-deps
+      - python/save-cache
+      - run:
+          command: python main.py
+          name: main
+
+workflows:
+  scheduled-workflow-1000:
+    triggers:
+      - schedule:
+          cron: "00 14 * * *"
+          filters:
+            branches:
+              only:
+                - main
+    jobs:
+        - build-and-test
+
+  scheduled-workflow-1530:
+    triggers:
+      - schedule:
+          cron: "30 19 * * *"
+          filters:
+            branches:
+              only:
+                - main
+    jobs:
+        - build-and-test
+
+  scheduled-workflow-2000:
+    triggers:
+      - schedule:
+          cron: "00 0 * * *"
+          filters:
+            branches:
+              only:
+                - main
+    jobs:
+        - build-and-test
+
+  scheduled-workflow-0100:
+    triggers:
+      - schedule:
+          cron: "00 5 * * *"
+          filters:
+            branches:
+              only:
+                - main
+    jobs:
+        - build-and-test
+
+  scheduled-workflow-0400:
+    triggers:
+      - schedule:
+          cron: "00 8 * * *"
+          filters:
+            branches:
+              only:
+                - main
+    jobs:
+        - build-and-test
+
+  scheduled-workflow-0700:
+    triggers:
+      - schedule:
+          cron: "00 11 * * *"
+          filters:
+            branches:
+              only:
+                - main
+    jobs:
+        - build-and-test
+
+  commit-workflow:
+    jobs:
+        - build-and-test:
+            filters:
+                branches:
+                    only:
+                        - development
