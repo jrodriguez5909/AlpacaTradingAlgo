@@ -52,7 +52,8 @@ def main(days_hist=1, st_hr_for_message=6, end_hr_for_message=9, n_stocks=30, n_
     Alpaca_instance = Alpaca(api=api)
 
     # Liquidates currently held assets that meet sell criteria and stores sales in a df
-    Alpaca_instance.sell_orders()
+    if (api.list_positions() != []):
+        Alpaca_instance.sell_orders()
 
     # Execute buy_orders using trades.buy_tickers and stores buys in a tickers_bought list
     Alpaca_instance.buy_orders(tickers=trades.buy_tickers)
