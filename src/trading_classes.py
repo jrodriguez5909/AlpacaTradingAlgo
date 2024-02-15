@@ -1,13 +1,13 @@
 import os
 import pandas as pd
 import yfinance as yf
-import alpaca_py as tradeapi
+import alpaca_trade_api as tradeapi
 import configparser
 import pytz
 import locale
 import pandas_market_calendars as mcal
 
-from alpaca_py.rest import APIError
+from alpaca_trade_api.rest import APIError
 from ta.volatility import BollingerBands
 from ta.momentum import RSIIndicator
 from ta.trend import sma_indicator

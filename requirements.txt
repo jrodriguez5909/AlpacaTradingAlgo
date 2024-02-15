@@ -6,5 +6,5 @@ tqdm>=4.55.1
 yfinance==0.1.67
 openpyxl>=3.0.6
 slackclient>=2.9.4
-alpaca-py
+alpaca_trade_api
 pandas_market_calendars
